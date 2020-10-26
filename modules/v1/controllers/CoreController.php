@@ -214,7 +214,7 @@ class CoreController extends Controller
             ->where([
                 'sysobject_id'    => $data['sysobject_id'],
                 'hw'              => $data['hw'],
-                'sys_description' => $data['sys_description']
+                'sys_description' => preg_replace('/^([^,]+).*/s', '${1}', $data['sys_description'])
             ])->scalar()
         ;
 
@@ -226,7 +226,7 @@ class CoreController extends Controller
                     'ip'              => $data['ip'],
                     'sysobject_id'    => $data['sysobject_id'],
                     'hw'              => $data['hw'],
-                    'sys_description' => $data['sys_description']
+                    'sys_description' => preg_replace('/^([^,]+).*/s', '${1}', $data['sys_description'])
                 ];
 
                 $success = DeviceAttributesUnknown::addNewAttributes($attributes);
